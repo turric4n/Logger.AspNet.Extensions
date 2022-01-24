@@ -1,5 +1,5 @@
 using Logger.AspNet.Extensions;
-using Microsoft.AspNetCore.HttpLogging;
+using Logger.Extensions;
 using Microsoft.Extensions;
 using QuickLogger.Extensions.NetCore;
 

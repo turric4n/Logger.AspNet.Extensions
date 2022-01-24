@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Logger.AspNet.Extensions\Logger.AspNet.Extensions.csproj" />
+    <ProjectReference Include="..\Logger.Extensions\Logger.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

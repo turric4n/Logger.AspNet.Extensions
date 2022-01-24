@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
+using System;
 
-namespace Logger.AspNet.Extensions
+namespace Logger.Extensions
 {
     public class CorrelationService : ICorrelationService
     {
@@ -34,11 +31,11 @@ namespace Logger.AspNet.Extensions
 
             context.Request.Headers.TryGetValue(CorrelationHeaderCallerMethodKey, out var correlationCallerMethod);
 
-            correlationId = string.IsNullOrEmpty(correlationId.ToString()) ? Guid.NewGuid().ToString() : correlationId;
+            correlationId = string.IsNullOrEmpty(correlationId.ToString()) ? (StringValues)Guid.NewGuid().ToString() : correlationId;
 
-            correlationCallerName = string.IsNullOrEmpty(correlationCallerName.ToString()) ? DefaultCallerName : correlationCallerName;
+            correlationCallerName = string.IsNullOrEmpty(correlationCallerName.ToString()) ? (StringValues)DefaultCallerName : correlationCallerName;
 
-            correlationCallerMethod = string.IsNullOrEmpty(correlationCallerMethod.ToString()) ? DefaultCallerName : correlationCallerMethod;
+            correlationCallerMethod = string.IsNullOrEmpty(correlationCallerMethod.ToString()) ? (StringValues)DefaultCallerName : correlationCallerMethod;
 
             return new Correlation()
             {

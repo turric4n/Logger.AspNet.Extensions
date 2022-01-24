@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger.AspNet.Extensions", "Logger.AspNet.Extensions.csproj", "{E62A9410-4427-4C4C-8ACE-0AE7AD9D8539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger.AspNet.Extensions", "Logger.AspNet.Extensions.csproj", "{E62A9410-4427-4C4C-8ACE-0AE7AD9D8539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger.AspNet.Extensions.Sample", "..\Logger.AspNet.Extensions.Sample\Logger.AspNet.Extensions.Sample.csproj", "{E20F1CED-A8E7-4D76-BFAA-67CE25D40B77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger.AspNet.Extensions.Sample", "..\Logger.AspNet.Extensions.Sample\Logger.AspNet.Extensions.Sample.csproj", "{E20F1CED-A8E7-4D76-BFAA-67CE25D40B77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger.Extensions", "..\Logger.Extensions\Logger.Extensions.csproj", "{7C358431-D1C7-4586-9907-97199EEA43A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E20F1CED-A8E7-4D76-BFAA-67CE25D40B77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E20F1CED-A8E7-4D76-BFAA-67CE25D40B77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E20F1CED-A8E7-4D76-BFAA-67CE25D40B77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C358431-D1C7-4586-9907-97199EEA43A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C358431-D1C7-4586-9907-97199EEA43A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C358431-D1C7-4586-9907-97199EEA43A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C358431-D1C7-4586-9907-97199EEA43A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
