@@ -7,7 +7,6 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddCorrelationService(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<ICorrelationService, CorrelationService>();
-            serviceCollection.AddHttpContextAccessor();
 
             return serviceCollection;
         }

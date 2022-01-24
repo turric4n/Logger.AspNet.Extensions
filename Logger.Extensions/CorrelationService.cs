@@ -23,13 +23,13 @@ namespace Logger.Extensions
 
         public Correlation GetCurrentCorrelation()
         {
-            var context = _httpContextAccessor.HttpContext;
+            var context = _httpContextAccessor?.HttpContext;
 
-            context.Request.Headers.TryGetValue(CorrelationHeaderIdKey, out var correlationId);
+            context?.Request.Headers.TryGetValue(CorrelationHeaderIdKey, out var correlationId);
 
-            context.Request.Headers.TryGetValue(CorrelationHeaderCallerNameKey, out var correlationCallerName);
+            context?.Request.Headers.TryGetValue(CorrelationHeaderCallerNameKey, out var correlationCallerName);
 
-            context.Request.Headers.TryGetValue(CorrelationHeaderCallerMethodKey, out var correlationCallerMethod);
+            context?.Request.Headers.TryGetValue(CorrelationHeaderCallerMethodKey, out var correlationCallerMethod);
 
             correlationId = string.IsNullOrEmpty(correlationId.ToString()) ? (StringValues)Guid.NewGuid().ToString() : correlationId;
 
