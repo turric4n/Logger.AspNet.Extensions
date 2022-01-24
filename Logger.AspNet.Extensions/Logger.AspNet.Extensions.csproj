@@ -8,6 +8,7 @@
     <PackageProjectUrl>https://github.com/turric4n/Logger.AspNet.Extensions</PackageProjectUrl>
     <Copyright>Turrican Sofware 2022</Copyright>
     <Description>Set of useful middleware extensions for ASP.NET</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

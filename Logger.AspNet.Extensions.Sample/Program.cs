@@ -26,4 +26,23 @@ app.MapGet("/", () =>
     return $"Hello World! - {correlation.CorrelationId}";
 });
 
+app.MapGet("/test", () =>
+{
+    app.Logger.LogInformation("test");
+
+    var correlationService = app.Services.GetRequiredService<ICorrelationService>();
+
+    var correlation = correlationService.GetCurrentCorrelation();
+
+    using var httpclient = new HttpClient();
+
+    httpclient.UseCorrelationHeaders(correlation);
+
+    var content = httpclient.GetAsync("http://localhost:5205").Result.Content.ReadAsStringAsync().Result;
+
+    var ok = content == $"Hello World! - {correlation.CorrelationId}";
+
+    return ok ? content : "Ko";
+});
+
 app.Run();
