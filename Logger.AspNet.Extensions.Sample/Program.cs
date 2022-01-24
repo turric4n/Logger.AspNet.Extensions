@@ -9,6 +9,8 @@ builder.Services.AddQuickLogger();
 
 builder.Services.AddCorrelationService();
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 app.UseHttpLogging();
