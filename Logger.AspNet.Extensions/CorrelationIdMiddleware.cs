@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 
 namespace Logger.AspNet.Extensions
 {
@@ -23,11 +24,11 @@ namespace Logger.AspNet.Extensions
             _loggerFactory = loggerFactory;
         }
 
-        private void AddHeaderIfNotPresent(HttpContext context, string headerName, string headerValue)
+        private void AddHeaderIfNotPresent(HttpContext context, string headerName, string currentHeaderValue, string newHeaderValue)
         {
-            if (string.IsNullOrEmpty(headerValue))
+            if (string.IsNullOrEmpty(currentHeaderValue))
             {
-                context.Request.Headers.Add(headerName, headerValue);
+                context.Request.Headers.Add(headerName, newHeaderValue);
             }
         }
 
@@ -41,24 +42,24 @@ namespace Logger.AspNet.Extensions
 
             context.Request.Headers.TryGetValue(CorrelationHeaderCallerMethodKey, out var correlationCallerMethod);
 
-            correlationId = string.IsNullOrEmpty(correlationId.ToString()) ? Guid.NewGuid().ToString() : correlationId;
+            StringValues newCorrelationId = string.IsNullOrEmpty(correlationId.ToString()) ? Guid.NewGuid().ToString() : correlationId;
 
-            correlationCallerName = string.IsNullOrEmpty(correlationCallerName.ToString()) ? DefaultCallerName : correlationCallerName;
+            StringValues newCorrelationCallerName = string.IsNullOrEmpty(correlationCallerName.ToString()) ? DefaultCallerName : correlationCallerName;
 
-            correlationCallerMethod = string.IsNullOrEmpty(correlationCallerMethod.ToString()) ? DefaultCallerName : correlationCallerMethod;
+            StringValues newCorrelationCallerMethod = string.IsNullOrEmpty(correlationCallerMethod.ToString()) ? DefaultCallerName : correlationCallerMethod;
 
-            AddHeaderIfNotPresent(context, CorrelationHeaderIdKey, correlationId);
+            AddHeaderIfNotPresent(context, CorrelationHeaderIdKey, correlationId, newCorrelationId);
 
-            AddHeaderIfNotPresent(context, CorrelationHeaderCallerNameKey, correlationCallerName);
+            AddHeaderIfNotPresent(context, CorrelationHeaderCallerNameKey, correlationCallerName, newCorrelationCallerName);
 
-            AddHeaderIfNotPresent(context, CorrelationHeaderCallerMethodKey, correlationCallerMethod);
+            AddHeaderIfNotPresent(context, CorrelationHeaderCallerMethodKey, correlationCallerMethod, newCorrelationCallerMethod);
 
             using var scope = (logger.BeginScope(
                 new Dictionary<string, object>()
                 {
-                    {"correlationId", correlationId},
-                    {"correlationCallerName", correlationCallerName},
-                    {"correlationCallerMethod", correlationCallerMethod},
+                    {"correlationId", newCorrelationId},
+                    {"correlationCallerName", newCorrelationCallerName},
+                    {"correlationCallerMethod", newCorrelationCallerMethod},
                 }));
 
             await this._next.Invoke(context);

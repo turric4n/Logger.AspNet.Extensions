@@ -5,7 +5,7 @@ namespace Microsoft.Extensions
 {
     public static class UseCorrelationIdExtensions
     {
-        public static IApplicationBuilder UseLoggerCorrelationIdMiddleware(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseLoggerCorrelationMiddleware(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<CorrelationMiddleware>();
         }
