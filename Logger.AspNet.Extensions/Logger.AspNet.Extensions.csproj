@@ -9,7 +9,7 @@
     <Copyright>Turrican Sofware 2022</Copyright>
     <Description>Set of useful middleware extensions for ASP.NET</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
