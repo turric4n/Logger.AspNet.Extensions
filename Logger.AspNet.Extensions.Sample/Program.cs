@@ -25,7 +25,7 @@ app.MapGet("/", () =>
 
     var correlation = correlationService.GetCurrentCorrelation();
 
-    return $"Hello World! - {correlation.CorrelationId}";
+    return $"Hello World! - {correlation.CorrelationId} {correlation.CorrelationCallerMethod} {correlation.CorrelationCallerName}";
 });
 
 app.MapGet("/test", () =>
@@ -38,11 +38,14 @@ app.MapGet("/test", () =>
 
     using var httpclient = new HttpClient();
 
+    correlation.CorrelationCallerName = "testing";
+    correlation.CorrelationCallerMethod = "calling from /test";
+
     httpclient.UseCorrelationHeaders(correlation);
 
     var content = httpclient.GetAsync("http://localhost:5205").Result.Content.ReadAsStringAsync().Result;
 
-    var ok = content == $"Hello World! - {correlation.CorrelationId}";
+    var ok = content == $"Hello World! - {correlation.CorrelationId} {correlation.CorrelationCallerMethod} {correlation.CorrelationCallerName}";
 
     return ok ? content : "Ko";
 });

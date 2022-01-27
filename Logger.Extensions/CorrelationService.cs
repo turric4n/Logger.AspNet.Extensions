@@ -11,9 +11,9 @@ namespace Logger.Extensions
 
         internal const string CorrelationHeaderIdKey = "correlationId";
 
-        internal const string CorrelationHeaderCallerNameKey = "correlationCallerName";
+        internal const string CorrelationHeaderCallerNameKey = "correlationCaller";
 
-        internal const string CorrelationHeaderCallerMethodKey = "correlationCallerMethod";
+        internal const string CorrelationHeaderCallerMethodKey = "correlationMethod";
 
         internal const string DefaultCallerName = "Undefined";
 
