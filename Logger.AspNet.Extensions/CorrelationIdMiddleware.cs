@@ -11,9 +11,9 @@ namespace Logger.AspNet.Extensions
     {
         internal const string CorrelationHeaderIdKey = "correlationId";
 
-        internal const string CorrelationHeaderCallerNameKey = "correlationCallerName";
+        internal const string CorrelationHeaderCallerNameKey = "correlationCaller";
 
-        internal const string CorrelationHeaderCallerMethodKey = "correlationCallerMethod";
+        internal const string CorrelationHeaderCallerMethodKey = "correlationMethod";
 
         internal const string DefaultCallerName = "Undefined";
 
@@ -61,8 +61,8 @@ namespace Logger.AspNet.Extensions
                 new Dictionary<string, object>()
                 {
                     {"correlationId", newCorrelationId},
-                    {"correlationCallerName", newCorrelationCallerName},
-                    {"correlationCallerMethod", newCorrelationCallerMethod},
+                    {"correlationCaller", newCorrelationCallerName},
+                    {"correlationMethod", newCorrelationCallerMethod},
                 }));
 
             await this._next.Invoke(context);
