@@ -22,7 +22,19 @@ namespace Logger.Extensions
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public static void ReplaceHeader(HttpContext context, string name, string value)
+        {
+            if (string.IsNullOrEmpty(value)) return;
 
+                context?.Request?.Headers.TryGetValue(name, out var current);
+
+            if (!string.IsNullOrEmpty(current))
+            {
+                context?.Request?.Headers.Remove(name);
+            }
+
+            context?.Request?.Headers.TryAdd(name, value);
+        }
 
         public Correlation GetCurrentCorrelation()
         {
@@ -51,11 +63,13 @@ namespace Logger.Extensions
         {
             var context = _httpContextAccessor?.HttpContext;
 
-            context?.Request?.Headers.TryAdd(CorrelationHeaderIdKey, correlation.CorrelationId);
+            if (context == null) return; 
 
-            context?.Request?.Headers.TryAdd(CorrelationHeaderCallerMethodKey, correlation.CorrelationCallerMethod);
+            ReplaceHeader(context, CorrelationHeaderCallerMethodKey, correlation?.CorrelationCallerMethod);
 
-            context?.Request?.Headers.TryAdd(CorrelationHeaderCallerNameKey, correlation.CorrelationCallerName);
+            ReplaceHeader(context, CorrelationHeaderCallerNameKey, correlation?.CorrelationCallerName);
+
+            ReplaceHeader(context, CorrelationHeaderIdKey, correlation?.CorrelationId);
         }
     }
 }
